@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+    </h:head>
+    <h:body>
+        <ui:composition>
+            <p:tabMenu activeIndex="#{param.i}" class="menu_inicial">
+                <p:menuitem value="Reserva" class="item_menu">
+                    <f:param name="i" value="0" />
+                </p:menuitem>
+                <p:menuitem value="Sala" class="item_menu">
+                    <f:param name="i" value="1" />
+                </p:menuitem>
+                <p:menuitem value="Responsável" class="item_menu">
+                    <f:param name="i" value="2" />
+                </p:menuitem>
+                <p:menuitem value="Configurações" class="item_menu" outcome="/configuracoes/configuracoes.xhtml">
+                    <f:param name="i" value="3" />
+                </p:menuitem>
+            </p:tabMenu>
+        </ui:composition>
+
+    </h:body>
+</html>

@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
         <title>Reserva de Salas - FastLease</title>
         <link rel="stylesheet" href="resources/geral.css"/>
@@ -12,20 +13,9 @@
         <h:form>
             <p:layout >
                 <p:layoutUnit position="center" class="layout">
-                    <p:tabMenu activeIndex="#{param.i}">
-                        <p:menuitem value="Reserva">
-                            <f:param name="i" value="0" />
-                        </p:menuitem>
-                        <p:menuitem value="Sala">
-                            <f:param name="i" value="1" />
-                        </p:menuitem>
-                        <p:menuitem value="Responsável">
-                            <f:param name="i" value="2" />
-                        </p:menuitem>
-                        <p:menuitem value="Configurações">
-                            <f:param name="i" value="3" />
-                        </p:menuitem>
-                    </p:tabMenu>
+                    <ui:insert name="header">
+                        <ui:include src="template/template.xhtml"/>
+                    </ui:insert>
                 </p:layoutUnit>
             </p:layout>
 
