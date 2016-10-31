@@ -6,24 +6,18 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
-        <title>Configurações - FastLease</title>        
+        <title>Configurações - FastLease</title>
+        <link rel="stylesheet" href="../resources/geral.css"/>
     </h:head>
     <h:body>
         <h:form>
             <p:layout class="layout">
-                <ui:insert name="header">
-                    <ui:include src="../template/template.xhtml"/>
-                </ui:insert>
-                <p:layoutUnit position="west" resizable="false" size="100">
-                    West
-                </p:layoutUnit>
-
                 <p:layoutUnit position="center">
-                    Center
+                    <ui:insert name="header">
+                        <ui:include src="../template/template.xhtml"/>
+                    </ui:insert>
                 </p:layoutUnit>
             </p:layout> 
         </h:form>
-
-
     </h:body>
 </html>
