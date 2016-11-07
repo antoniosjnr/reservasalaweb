@@ -44,14 +44,9 @@ public class ReservaMB {
 
         reserva.setSala(sala);
         reserva.setResponsavel(responsavel);
-
-        if (dao.buscaReservaPeriodo(reserva.getData(), reserva.getPeriodo()) == null) {
-            dao.salvar(reserva);
-            this.reservas = null;
-            novo();
-        } else {
-
-        }
+        dao.salvar(reserva);
+        this.reservas = null;
+        novo();
     }
 
     public void buscaPorId() {
