@@ -11,18 +11,15 @@
     <h:body>
         <ui:composition>
             <p:tabMenu activeIndex="#{param.i}" class="menu_inicial">
-                <p:menuitem value="Reserva" class="item_menu">
+                <p:menuitem value="Reserva" class="item_menu" outcome="#{redirect.irReserva()}">
                     <f:param name="i" value="0" />
                 </p:menuitem>
-                <p:menuitem value="Sala" class="item_menu">
+                <p:menuitem value="Sala" class="item_menu" outcome="#{redirect.irSala()}">
                     <f:param name="i" value="1" />
                 </p:menuitem>
-                <p:menuitem value="Responsável" class="item_menu">
+                <p:menuitem value="Responsável" class="item_menu" outcome="#{redirect.irResponsavel()}">
                     <f:param name="i" value="2" />
-                </p:menuitem>
-                <p:menuitem value="Configurações" class="item_menu" outcome="/configuracoes/configuracoes.xhtml">
-                    <f:param name="i" value="3" />
-                </p:menuitem>
+                </p:menuitem>               
             </p:tabMenu>
         </ui:composition>
 
