@@ -4,7 +4,11 @@ import br.com.reservasala.model.Reserva;
 import br.com.reservasala.model.Responsavel;
 import br.com.reservasala.model.Sala;
 import br.com.reservasala.model.persistencia.ReservaDAOJPA;
+import br.com.reservasala.model.persistencia.ResponsavelDAOJPA;
+import br.com.reservasala.model.persistencia.SalaDAOJPA;
 import br.com.reservasala.model.persistencia.dao.ReservaDAO;
+import br.com.reservasala.model.persistencia.dao.ResponsavelDAO;
+import br.com.reservasala.model.persistencia.dao.SalaDAO;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -13,6 +17,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
+import javax.swing.JOptionPane;
 
 @ManagedBean
 @ViewScoped
@@ -20,8 +25,8 @@ public class ReservaMB {
 
     private Reserva reserva;
     private List<Reserva> reservas;
-    private Sala sala;
-    private Responsavel responsavel;
+    private int idSala;
+    private int idResponsavel;
 
     @PostConstruct
     public void novo() {
@@ -31,9 +36,22 @@ public class ReservaMB {
     public void salvar() {
         EntityManager manager = this.getManager();
         ReservaDAO dao = new ReservaDAOJPA(manager);
-        dao.salvar(reserva);
-        this.reservas = null;
-        novo();
+        SalaDAO dao2 = new SalaDAOJPA(manager);
+        ResponsavelDAO dao3 = new ResponsavelDAOJPA(manager);
+
+        Sala sala = dao2.buscarPorId(Sala.class, idSala);
+        Responsavel responsavel = dao3.buscarPorId(Responsavel.class, idResponsavel);
+
+        reserva.setSala(sala);
+        reserva.setResponsavel(responsavel);
+
+        if (dao.buscaReservaPeriodo(reserva.getData(), reserva.getPeriodo()) == null) {
+            dao.salvar(reserva);
+            this.reservas = null;
+            novo();
+        } else {
+
+        }
     }
 
     public void buscaPorId() {
@@ -74,23 +92,19 @@ public class ReservaMB {
         this.reserva = reserva;
     }
 
-    public Sala getSala() {
-        return sala;
+    public int getIdSala() {
+        return idSala;
     }
 
-    public void setSala(Sala sala) {
-        this.sala = sala;
+    public void setIdSala(int idSala) {
+        this.idSala = idSala;
     }
 
-    public Responsavel getResponsavel() {
-        return responsavel;
+    public int getIdResponsavel() {
+        return idResponsavel;
     }
 
-    public void setResponsavel(Responsavel responsavel) {
-        this.responsavel = responsavel;
+    public void setIdResponsavel(int idResponsavel) {
+        this.idResponsavel = idResponsavel;
     }
-    
-    
-    
-    
 }

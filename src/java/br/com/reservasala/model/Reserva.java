@@ -1,15 +1,18 @@
 package br.com.reservasala.model;
 
-import java.sql.Date;
+import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
-public class Reserva {
+public class Reserva implements Serializable {
     
     @Id @GeneratedValue
     private int codigo;
@@ -19,6 +22,7 @@ public class Reserva {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_responsavel")
     private Responsavel responsavel;
+    @Temporal(TemporalType.DATE)
     private Date data;
     private String periodo;
 

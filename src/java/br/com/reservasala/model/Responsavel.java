@@ -1,11 +1,12 @@
 package br.com.reservasala.model;
 
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Responsavel {
+public class Responsavel implements Serializable {
     
     @Id @GeneratedValue
     private int codigo;
