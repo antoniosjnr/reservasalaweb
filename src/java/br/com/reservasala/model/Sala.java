@@ -5,13 +5,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Sala {
+public class Sala{
     
     @Id @GeneratedValue
     private int codigo;
     private String nome;
     private String bloco;
     private int andar;
+
+    public Sala() {        
+    }
 
     public int getCodigo() {
         return codigo;

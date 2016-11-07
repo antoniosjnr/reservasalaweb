@@ -16,52 +16,66 @@ and open the template in the editor.
         <h:outputStylesheet name="geral.css"/>
     </h:head>
     <h:body>
-        <h:form>
+        <h:form prependId="false">
             <p:layout >
                 <p:layoutUnit position="center" class="layout">
                     <ui:insert name="header">
                         <ui:include src="template/template.xhtml"/>
                     </ui:insert>
 
-                    <p:dataTable var="sal" style="margin-top:2em;font-size: 12px;">
+                    <p:dataTable id="tabelaResponsavel" var="res" value="#{responsavelMB.responsaveis}" style="margin-top:2em;font-size: 12px;">
                         <p:column headerText="Código">
-                            <h:outputText/>
+                            <h:outputText value="#{res.codigo}"/>
                         </p:column>
 
                         <p:column headerText="Nome">
-                            <h:outputText/>
+                            <h:outputText value="#{res.nome}"/>
                         </p:column>
 
                         <p:column headerText="E-mail">
-                            <h:outputText/>
+                            <h:outputText value="#{res.email}"/>
                         </p:column>
 
                         <p:column headerText="Telefone">
-                            <h:outputText/>
-                        </p:column>               
+                            <h:outputText value="#{res.telefone}"/>
+                        </p:column>
+                        <p:column>
+                            <p:commandButton 
+                                action="#{responsavelMB.buscaPorId()}"
+                                icon="ui-icon-pencil"
+                                update="cmpNome,cmpCPF,cmpEmail,cmpTelefone">
+                                <f:setPropertyActionListener 
+                                    value="#{res}"
+                                    target="#{responsavelMB.responsavel}"/>  
+                            </p:commandButton>
+                            <p:commandButton 
+                                action="#{responsavelMB.remove}"
+                                update="tabelaResponsavel"
+                                icon="ui-icon-close">
+                                <f:setPropertyActionListener 
+                                    value="#{res}"
+                                    target="#{responsavelMB.responsavel}"/>  
+                            </p:commandButton>
+                        </p:column>
                     </p:dataTable> 
                     <hr/>
                     <p:fieldset legend="Dados responsáveis" style="font-size: 12px;">
-                        <h:panelGrid columns="2" cellpadding="5">
-                            <p:outputLabel for="cmpCodigo" value="Código:"/>
-                            <p:inputText size="10" id="cmpCodigo"/>
+                        <h:panelGrid columns="2" cellpadding="5">                           
 
                             <p:outputLabel for="cmpNome" value="Nome:"/>
-                            <p:inputText id="cmpNome"/>
+                            <p:inputText id="cmpNome" value="#{responsavelMB.responsavel.nome}"/>
 
                             <p:outputLabel for="cmpCPF" value="CPF:"/>
-                            <p:inputMask id="cmpCPF" mask="999.999.999-99" maxlength="11"/>
+                            <p:inputMask id="cmpCPF" mask="999.999.999-99" maxlength="11" value="#{responsavelMB.responsavel.CPF}"/>
 
                             <p:outputLabel for="cmpEmail" value="E-mail:"/>
-                            <p:inputText id="cmpEmail"/>
-                            
-                            <p:outputLabel for="cmpTelefone" value="Telefone:"/>
-                            <p:inputMask id="cmpTelefone" mask="(99)9999-9999"/>
+                            <p:inputText id="cmpEmail" value="#{responsavelMB.responsavel.email}"/>
 
-                            <p:button value="Novo">                                
-                            </p:button>
-                            <p:button value="Salvar">                                
-                            </p:button>
+                            <p:outputLabel for="cmpTelefone" value="Telefone:"/>
+                            <p:inputMask id="cmpTelefone" mask="(99)9999-9999" value="#{responsavelMB.responsavel.telefone}"/>
+
+                            <p:commandButton value="Novo" id="cmdNovo" action="#{responsavelMB.novo}" update="cmpNome,cmpCPF,cmpEmail,cmpTelefone"/>                                
+                            <p:commandButton value="Salvar" id="cmdSalvar" action="#{responsavelMB.salvar}" update="cmpNome,cmpCPF,cmpEmail,cmpTelefone,tabelaResponsavel" />
                         </h:panelGrid>
                     </p:fieldset>
                 </p:layoutUnit>                

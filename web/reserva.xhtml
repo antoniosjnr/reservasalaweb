@@ -17,25 +17,25 @@
                         <ui:include src="template/template.xhtml"/>
                     </ui:insert>
 
-                    <p:dataTable var="res" style="margin-top:2em;font-size: 12px;">
+                    <p:dataTable id="tabelaReserva" var="res" value="#{reservaMB.reservas}" style="margin-top:2em;font-size: 12px;">
                         <p:column headerText="Código">
-                            <h:outputText/>
+                            <h:outputText value="#{res.codigo}"/>
                         </p:column>
 
                         <p:column headerText="Sala">
-                            <h:outputText/>
+                            <h:outputText value="#{res.sala.nome}"/>
                         </p:column>
 
                         <p:column headerText="Responsável">
-                            <h:outputText/>
+                            <h:outputText value="#{res.responsavel.nome}"/>
                         </p:column>
 
                         <p:column headerText="Data Reserva">
-                            <h:outputText/>
+                            <h:outputText value="#{res.data}"/>
                         </p:column>
 
                         <p:column headerText="Período">
-                            <h:outputText/>
+                            <h:outputText value="#{res.periodo}"/>
                         </p:column>                        
                     </p:dataTable> 
                     <hr/>

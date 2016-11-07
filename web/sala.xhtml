@@ -16,47 +16,62 @@ and open the template in the editor.
         <h:outputStylesheet name="geral.css"/>
     </h:head>
     <h:body>
-        <h:form>
+        <h:form prependId="false">
             <p:layout >
                 <p:layoutUnit position="center" class="layout">
                     <ui:insert name="header">
                         <ui:include src="template/template.xhtml"/>
                     </ui:insert>
 
-                    <p:dataTable value="#{salaMB.salas}" var="sal" style="margin-top:2em;font-size: 12px;">
+                    <p:dataTable id="tabelaSala" value="#{salaMB.salas}" var="sal" style="margin-top:2em;font-size: 12px;">
                         <p:column headerText="Código">
-                            <h:outputText/>
+                            <h:outputText value="#{sal.codigo}"/>
                         </p:column>
 
                         <p:column headerText="Nome">
-                            <h:outputText/>
+                            <h:outputText value="#{sal.nome}"/>
                         </p:column>
 
                         <p:column headerText="Bloco">
-                            <h:outputText/>
+                            <h:outputText value="#{sal.bloco}"/>
                         </p:column>
 
                         <p:column headerText="Andar">
-                            <h:outputText/>
-                        </p:column>               
+                            <h:outputText value="#{sal.andar}"/>
+                        </p:column>
+                        <p:column>
+                            <p:commandButton 
+                                action="#{salaMB.buscaPorId()}"
+                                icon="ui-icon-pencil"
+                                update="cmpNome,cmpBloco,cmpAndar">
+                                <f:setPropertyActionListener 
+                                    value="#{sal}"
+                                    target="#{salaMB.sala}"/>  
+                            </p:commandButton>
+                            <p:commandButton 
+                                action="#{salaMB.remove}"
+                                update="tabelaSala"
+                                icon="ui-icon-close">
+                                <f:setPropertyActionListener 
+                                    value="#{sal}"
+                                    target="#{salaMB.sala}"/>  
+                            </p:commandButton>
+                        </p:column>
                     </p:dataTable> 
                     <hr/>
                     <p:fieldset legend="Dados salas" style="font-size: 12px;">
                         <h:panelGrid columns="2" cellpadding="5">
-                            <p:outputLabel for="cmpCodigo" value="Código:"/>
-                            <p:inputText size="10" id="cmpCodigo" value="#{salaMB.sala.codigo}"/>
-
                             <p:outputLabel for="cmpNome" value="Nome:"/>
                             <p:inputText id="cmpNome" value="#{salaMB.sala.nome}"/>
-                            
+
                             <p:outputLabel for="cmpBloco" value="Bloco:"/>
                             <p:inputText id="cmpBloco" value="#{salaMB.sala.bloco}"/>
-                            
+
                             <p:outputLabel for="cmpAndar" value="Andar:"/>
                             <p:inputText id="cmpAndar" value="#{salaMB.sala.andar}"/>
-                            
-                            <p:commandButton value="Novo" id="cmdNovo" action="#{salaMB.novo()}"/>
-                            <p:commandButton value="Salvar" id="cmdSalvar" action="#{salaMB.salvar()}" />
+
+                            <p:commandButton value="Novo" id="cmdNovo" action="#{salaMB.novo}" update="cmpNome,cmpBloco,cmpAndar"/>                                
+                            <p:commandButton value="Salvar" id="cmdSalvar" action="#{salaMB.salvar}" update="cmpNome,cmpBloco,cmpAndar,tabelaSala" />
                         </h:panelGrid>
                     </p:fieldset>
                 </p:layoutUnit>                

@@ -4,6 +4,7 @@ import br.com.reservasala.model.Sala;
 import br.com.reservasala.model.persistencia.SalaDAOJPA;
 import br.com.reservasala.model.persistencia.dao.SalaDAO;
 import java.awt.event.ActionEvent;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -16,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @ManagedBean
 @ViewScoped
-public class SalaMB {
+public class SalaMB implements Serializable{
 
     private Sala sala;
     private List<Sala> salas;
@@ -31,7 +32,7 @@ public class SalaMB {
         SalaDAO dao = new SalaDAOJPA(manager);
         dao.salvar(sala);
         this.salas = null;
-        novo();
+        novo();        
     }
 
     public void buscaPorId() {
@@ -48,7 +49,7 @@ public class SalaMB {
     }
 
     public List<Sala> getSalas() {
-        if (salas != null) {
+        if (salas == null) {
             EntityManager manager = this.getManager();
             SalaDAO dao = new SalaDAOJPA(manager);
             this.salas = dao.buscarTodos(Sala.class);
