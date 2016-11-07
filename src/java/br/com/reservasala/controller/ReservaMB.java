@@ -17,16 +17,16 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
-import javax.swing.JOptionPane;
 
 @ManagedBean
 @ViewScoped
-public class ReservaMB {
+public class ReservaMB{
 
     private Reserva reserva;
     private List<Reserva> reservas;
     private int idSala;
     private int idResponsavel;
+    private String mensagem;
 
     @PostConstruct
     public void novo() {
@@ -44,9 +44,13 @@ public class ReservaMB {
 
         reserva.setSala(sala);
         reserva.setResponsavel(responsavel);
-        dao.salvar(reserva);
-        this.reservas = null;
-        novo();
+        if (dao.buscaReservaPeriodo(reserva.getData(), reserva.getPeriodo(),reserva.getSala().getCodigo()).isEmpty()) {
+            dao.salvar(reserva);
+            this.reservas = null;
+            novo();
+        }else{
+            this.mensagem = "Já existe uma reserva para esta data e período!";
+        }
     }
 
     public void buscaPorId() {
@@ -101,5 +105,9 @@ public class ReservaMB {
 
     public void setIdResponsavel(int idResponsavel) {
         this.idResponsavel = idResponsavel;
+    }
+
+    public String getMensagem() {
+        return mensagem;
     }
 }

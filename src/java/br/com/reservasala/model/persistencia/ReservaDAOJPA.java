@@ -17,13 +17,21 @@ public class ReservaDAOJPA extends DAOJPA<Reserva, Integer> implements ReservaDA
         super(manager);
         this.manager = manager;
     }    
-    public List<Reserva> buscaReservaPeriodo(Date dataReserva,String periodo){        
+   
+    @Override
+    public List<Reserva> buscaReservaPeriodo(Date dataReserva,String periodo,int idSala){        
+        
+        List<Reserva> reservas = null;
         
         Query q = this.manager.createQuery
-               ("select r from Reserva r where c.data = :data and periodo = :periodo", Reserva.class);
+               ("select r from Reserva r where r.data = :data and r.periodo = :periodo"
+                + "where id_sala = :idSala", Reserva.class);
        q.setParameter("data",dataReserva);
-       q.setParameter("periodo",periodo);       
-       return q.getResultList();
+       q.setParameter("periodo",periodo);
+       q.setParameter("idSala",idSala);
+       reservas = q.getResultList();
+       
+       return reservas;
     }
     
 }

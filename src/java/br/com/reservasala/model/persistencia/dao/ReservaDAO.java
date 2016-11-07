@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface ReservaDAO extends DAO<Reserva,Integer>{
     
-    public List<Reserva> buscaReservaPeriodo(Date dataReserva,String periodo);  
+    public List<Reserva> buscaReservaPeriodo(Date dataReserva,String periodo, int idSala);  
     
 }

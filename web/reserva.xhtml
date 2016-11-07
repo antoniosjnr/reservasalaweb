@@ -39,7 +39,7 @@
                         <p:column headerText="Período">
                             <h:outputText value="#{res.periodo}"/>
                         </p:column>
-                        <p:column>
+                        <p:column width="15%">
                             <p:commandButton 
                                 action="#{reservaMB.buscaPorId()}"
                                 icon="ui-icon-pencil"
@@ -70,7 +70,6 @@
                                     itemLabel="#{sala.nome}"
                                     itemValue="#{sala.codigo}"/>
                             </p:selectOneMenu>
-
                             <p:outputLabel for="cmpResponsavel" value="Responsável:"/>
                             <p:selectOneMenu id="cmpResponsavel" style="width:200px" value="#{reservaMB.idResponsavel}">
                                 <f:selectItems
@@ -91,12 +90,15 @@
                                 <f:selectItem itemLabel="Vespertino" itemValue="Vespertino"/>
                                 <f:selectItem itemLabel="Noturno" itemValue="Noturno"/>                                
                             </p:selectOneMenu>
-                            <p:commandButton value="Novo" id="cmdNovo" action="#{reservaMB.novo}" update="cmpSala,cmpResponsavel,cmpData,cmpPeriodo"/>                                
-                            <p:commandButton value="Salvar" id="cmdSalvar" action="#{reservaMB.salvar}" update="cmpSala,cmpResponsavel,cmpData,cmpPeriodo,tabelaReserva" />
+                            <p:commandButton value="Novo" id="cmdNovo" action="#{reservaMB.novo}" update="cmpSala,cmpResponsavel,cmpData,cmpPeriodo,mensagem"/>                                
+                            <p:commandButton value="Salvar" id="cmdSalvar" action="#{reservaMB.salvar}" update="cmpSala,cmpResponsavel,cmpData,cmpPeriodo,tabelaReserva,mensagem" />                            
+                            <br/>
+                            <p:outputLabel id="mensagem" style="font-size: 10px;color:red" value="#{reservaMB.mensagem}" />
                         </h:panelGrid>
                     </p:fieldset>
                 </p:layoutUnit>                
             </p:layout>
+            
 
         </h:form>
 
